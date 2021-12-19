@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row mt-5 justify-content-center">
+    <button class="btn btn-primary" data-toggle="modal"
+                  data-target="#votingModal">Create new</button>
+  </div>
+  <div class="row mt-3">
+    <div class="col-lg-8 offset-lg-2 col-sm-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Created</th>
+            <th>Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        {{#each votingSystems}}
+        <tr>
+          <td>{{formatDate this.created 'yyyy/MM/dd HH:mm'}}</td>
+          <td>
+            {{this.name}}
+          </td>
+          <td>
+            <a href="#" class="btn btn-sm btn-danger" data-msg="This will also delete all associated sessions."
+              data-href="/delete-voting/{{this._id}}?redirect=/my-voting-systems" data-toggle="modal"
+              data-target="#confirmDelete" title="Delete"><i class="bi bi-trash"></i></a>
+          </td>
+        </tr>
+        {{/each}}
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="votingModal" tabindex="-1" aria-labelledby="votingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    {{> votingform redirect="/my-voting-systems"}}
+  </div>
+</div>

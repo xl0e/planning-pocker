@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Create new session</h5>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="/session">
+            <div class="form-group">
+              <label for="sessionName">Session name</label>
+              <input type="text" name="sessionName" class="form-control{{#if errors.sessionName}} is-invalid{{/if}}"
+                id="sessionName" value="{{body.sessionName}}" required>
+              {{#if errors.sessionName}}
+              <div id="sessionNameFeedback" class="invalid-feedback">
+                {{errors.sessionName.msg}}
+              </div>
+              {{/if}}
+            </div>
+            <div class="form-group">
+              <label for="votingSystem">Select voting system <a href="#" data-toggle="modal"
+                  data-target="#votingModal">(or create new)</a></label>
+              <select name="votingSystem" class="form-control" id="votingSystem">
+                {{#each votingSystems}}
+                <option value="{{this._id}}">{{this.name}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="votingModal" tabindex="-1" aria-labelledby="votingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    {{> votingform }}
+  </div>
+</div>

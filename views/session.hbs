@@ -1,0 +1,77 @@
+<div class="container-fluid mt-5">
+
+  <div class="text-center mb-4">
+    {{#if isOwner}}
+    <a href="/start-vote/{{session.id}}" class="btn btn-danger mb-1"><i class="bi bi-arrow-clockwise"></i> Restart</a>
+    {{#if session.started}}
+    <a href="/reveal-votes/{{session.id}}" class="btn btn-primary mb-1 ml-3"><i class="bi bi-eye"></i> Reveal votes</a>
+    {{/if}}
+    <button 
+      type="button"
+      class="copy-location btn btn-outline-success ml-3 mb-1"
+      data-placement="right"
+      data-title="Link is coppied"
+      data-trigger="manual"
+      data-copy="/session/{{session.id}}"><i class="bi bi-person-plus"></i> Invite</button>
+    {{/if}}
+  </div>
+  <div class="row justify-content-center mb-3">
+    {{#each session.voters}}
+    <div class="col-lg-2 col-md-3 col-sm-6">
+      <div class="card text-center mb-3 mr-3 {{#if this.vote}}bg-primary text-white{{else}}bg-light{{/if}}">
+        <div class="card-header">
+          {{#ifEq this.id ../userid}}
+          <strong>Me</strong>
+          {{else}}
+          {{this.name}}
+          {{#if ../canDropVoter}}
+          <a href="/drop-user/{{../session.id}}?user={{this.id}}"><i
+              class="bi bi-x {{#if this.vote}}text-white{{else}}text-dark{{/if}}"></i></a>
+          {{/if}}
+          {{/ifEq}}
+        </div>
+        <div class="card-body">
+          {{#if ../session.reveal}}
+          <div class="mb-3">
+            <h3>{{this.vote}}</h3>
+          </div>
+          {{/if}}
+          {{#if ../isOwner}}
+          {{#ifEq this.id ../userid}}
+          {{else}}
+          <div>
+
+          </div>
+          {{/ifEq}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  {{#if session.reveal}}
+  <div class="row mb-3">
+    <div class="col-lg-4 offset-lg-4">
+      {{#each session.result}}
+      <div class="progress mt-2">
+        <div class="progress-bar bg-success" role="progressbar" style="width: {{this.share}}%" aria-valuenow="25"
+          aria-valuemin="0" aria-valuemax="100"><b>{{this.vote}} [{{this.share}}%]</b></div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+
+  {{#if session.started}}
+  <div class="row justify-content-center mb-2">
+    <h5>Pick your vote</h5>
+  </div>
+  <div class="text-center">
+    {{#each votingSystem.values}}
+    <a href="/vote/{{../session.id}}/{{this}}"
+      class="btn btn-lg mb-1 {{#ifEq ../me.vote this}}btn-primary{{else}}btn-outline-primary{{/ifEq}}">{{this}}</a>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>

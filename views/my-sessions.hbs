@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row mt-5 justify-content-center">
+    <a class="btn btn-primary" href="/">Create new</a>
+  </div>
+  <div class="row mt-3">
+    <div class="col-lg-8 offset-lg-2 col-sm-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Created</th>
+            <th>Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        {{#each userSessions}}
+        <tr>
+          <td>{{formatDate this.created 'yyyy/MM/dd HH:mm'}}</td>
+          <td>
+            {{this.name}}
+          </td>
+          <td>
+            <a href="/session/{{this.id}}" class="btn btn-sm btn-primary" title="Join">
+              <i class="bi bi-box-arrow-in-right"></i></a>
+            <a href="#" class="btn btn-sm btn-danger" 
+              data-msg="Do you realy want to delete this sessions?"
+              data-href="/delete-session/{{this.id}}?redirect=/my-sessions" 
+              data-toggle="modal" 
+              data-target="#confirmDelete" 
+              title="Delete"><i class="bi bi-trash"></i></a>
+          </td>
+        </tr>
+        {{/each}}
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="votingModal" tabindex="-1" aria-labelledby="votingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    {{> votingform }}
+  </div>
+</div>
