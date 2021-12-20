@@ -1,7 +1,10 @@
 import { MongoClient } from 'mongodb'
 
 // Connection URL
-const url = 'mongodb://localhost:27017'
+const mongoHost = process.env.MONGODB_HOST || 'localhost'
+const mongoPort = process.env.MONGODB_PORT || '27017'
+
+const url = `mongodb://${mongoHost}:${mongoPort}`
 const client = new MongoClient(url)
 
 // Database Name
