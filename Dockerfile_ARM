@@ -4,6 +4,4 @@ WORKDIR /home/app
 
 COPY . .
 
-RUN npm install --unsafe-perm
-
-CMD npm run serve
+CMD npm install --unsafe-perm && npm run serve
