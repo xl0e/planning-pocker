@@ -1,0 +1,9 @@
+FROM node:17-bullseye-slim
+
+WORKDIR /home/app
+
+COPY . .
+
+RUN npm install --unsafe-perm
+
+CMD npm run serve

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row mt-5 justify-content-center">
-    <a class="btn btn-primary" href="/">Create new</a>
+    <a class="btn btn-primary" href="/"><i class="bi bi-plus-square"></i> Create new</a>
   </div>
   <div class="row mt-3">
     <div class="col-lg-8 offset-lg-2 col-sm-12">
@@ -20,13 +20,13 @@
           </td>
           <td>
             <a href="/session/{{this.id}}" class="btn btn-sm btn-primary" title="Join">
-              <i class="bi bi-box-arrow-in-right"></i></a>
+              <i class="bi bi-box-arrow-in-right"></i> Join</a>
             <a href="#" class="btn btn-sm btn-danger" 
               data-msg="Do you realy want to delete this sessions?"
               data-href="/delete-session/{{this.id}}?redirect=/my-sessions" 
               data-toggle="modal" 
               data-target="#confirmDelete" 
-              title="Delete"><i class="bi bi-trash"></i></a>
+              title="Delete"><i class="bi bi-trash"></i> Delete</a>
           </td>
         </tr>
         {{/each}}
