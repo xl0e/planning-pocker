@@ -2,6 +2,7 @@ import db from '../db/db.js'
 import _ from 'lodash'
 
 const collection = db.collection('sessions')
+const maxVotersPerSession = process.env.MAX_VOTERS_PER_SESSION || 2
 
 class Session {
 
@@ -30,9 +31,13 @@ class Session {
   async addVoter (id, voterid, username) {
     let voters = await this.getVoters(id)
     let user = _.find(voters, u => u.id === voterid) || {}
+
     if (!user.id || user.name !== username) {
       if (!user.id) {
         user.id = voterid
+        if (voters.length > maxVotersPerSession) {
+          throw new Error('Max voters per session limit is reached')
+        }
         voters.push(user)
       }
       user.name = username
