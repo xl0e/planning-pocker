@@ -2,8 +2,8 @@ FROM --platform=linux/arm64 node:17-bullseye-slim
 
 WORKDIR /home/app
 
-RUN npm install
-
 COPY . .
 
-CMD npm install --unsafe-perm && npm run serve
+RUN npm install
+
+CMD npm run serve
